@@ -7,11 +7,15 @@
 # @Date  : 2020/9/17
 # @Email  : 560331
 
-import jiagu
+from LAC import LAC
+import time
+lac=LAC(mode='lac')
+a=time.time()
+text=u"空调打开半小时"
 
-text='洗衣机打开两分钟'
-
-words=jiagu.seg(text)
-print(words)
-ner=jiagu.ner(words)
-print(ner)
+lac_result=lac.run(text)
+b=time.time()-a
+print(dict(zip(lac_result[1],lac_result[0])))
+print(lac_result)
+print('使用了时间')
+print(b)

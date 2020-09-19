@@ -24,7 +24,7 @@ lstm_crf.creat_model()
 
 model=lstm_crf.model
 
-hist=model.fit(train_data,train_label,batch_size=32,epochs=2,validation_data=[test_data,test_label])
+hist=model.fit(train_data,train_label,batch_size=32,epochs=5,validation_data=[test_data,test_label])
 
 model.save('bi_crf.h5')
 

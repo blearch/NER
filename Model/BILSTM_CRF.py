@@ -6,11 +6,10 @@
 # @File : BILSTM_CRF.py
 # @Date  : 2020/9/17
 # @Email  : 560331
-
+from tensorflow_addons.layers import crf
 from keras.models import Model
 from keras.layers import Embedding, Bidirectional, LSTM, Dense, Dropout, Input
 from keras_contrib.layers import CRF
-
 from DataProcess.gree_process_data import DataProcess
 
 
@@ -34,8 +33,9 @@ class BILSTMCRF():
         x = Bidirectional(LSTM(units=self.rnn_units, return_sequences=True))(x)
         x = Dropout(self.drop_rate)(x)
         x = Dense(self.n_class)(x)
-        self.crf = CRF(self.n_class, sparse_target=False)
-        x = self.crf(x)
+        # self.crf = CRF(self.n_class, sparse_target=False)
+        # x = self.crf(x)
+        x=crf(x,self.vocab_size)
         self.model = Model(inputs=inputs, outputs=x)
         self.model.summary()
         self.compile()
